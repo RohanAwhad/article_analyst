@@ -43,26 +43,27 @@ def read_pdf(file_path):
     return text
 
 def main():
-    st.title("PDF Summary")
+    st.title("Article Analyst")
     uploaded_file = st.file_uploader("Choose a PDF file", type="pdf")
 
     if uploaded_file is not None:
-        with open("uploaded.pdf", "wb") as f:
-            f.write(uploaded_file.getvalue())
+        with st.spinner("Generating summary..."):
+            with open("uploaded.pdf", "wb") as f:
+                f.write(uploaded_file.getvalue())
 
-        pdf_text = read_pdf("uploaded.pdf")
+            pdf_text = read_pdf("uploaded.pdf")
 
-        if not pdf_text.strip():
-            pdf_text = extract_text_using_tesseract("uploaded.pdf")
+            if not pdf_text.strip():
+                pdf_text = extract_text_using_tesseract("uploaded.pdf")
 
-        if not pdf_text.strip():
-            st.write("Sorry, couldn't extract text from the PDF.")
-            return
+            if not pdf_text.strip():
+                st.write("Sorry, couldn't extract text from the PDF.")
+                return
 
-        user_message = Message('user', pdf_text)
-        history.append(user_message)
-        response = llm_call(model="gpt-4o-mini", messages=history)
-        st.markdown(response)
+            user_message = Message('user', pdf_text)
+            history.append(user_message)
+            response = llm_call(model="gpt-4o-mini", messages=history)
+            st.markdown(response)
 
 if __name__ == "__main__":
     main()
