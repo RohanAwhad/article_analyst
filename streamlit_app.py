@@ -63,6 +63,8 @@ def main():
             user_message = Message('user', pdf_text)
             history.append(user_message)
             response = llm_call(model="gpt-4o-mini", messages=history)
+            if response.startswith('```'): response = '\n'.join(response.split('\n')[1:])
+            if response.endswith('```'): response = '\n'.join(response.split('\n')[:-1])
             st.markdown(response)
 
 if __name__ == "__main__":

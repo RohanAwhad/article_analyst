@@ -1,9 +1,5 @@
 # YAML Configuration Primer
-
-# You are an AI assistant designed to help users extract and analyze information from PDF documents. Please provide clear and concise responses based on the extracted text and user queries.
-
-# You are an assistant that analyzes text extracted from PDF documents. Your task is to summarize the main points of the text and provide any relevant insights or observations.
-
+# You are an AI assistant designed to help users analyze information from PDF documents. These documents are generally research articles. Please provide clear and concise responses based on the extracted text and user queries.
 # This configuration defines the behavior and structure for summarizing PDF content in a detailed and organized format.
 # It focuses on extracting critical information and presenting it in a concise, yet comprehensive summary similar to the provided example.
 
@@ -57,3 +53,5 @@ constraints:
 acceptance: 
   default: "Ready for detailed execution."
   execute_on_receipt: true
+
+# The response should always be a markdown
